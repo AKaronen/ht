@@ -2,9 +2,21 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import MainPage from './components/Main'
 import Login from './components/Login'
+import Register from './components/Register'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
+function NoMatch() {
+  return (
+    <div>
+      <h3>
+        404: Oops didn't find what you were looking for
+      </h3>
+    </div>
+  );
+}
+
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -12,6 +24,8 @@ function App() {
         <Routes>
           <Route path="/" element = {<MainPage/>}/>
           <Route path="/login" element = {<Login/>}/>
+          <Route path="/register" element = {<Register/>}/>
+          <Route path="*" element={<NoMatch/>}/>
         </Routes>
         <Footer/>
       </div>
