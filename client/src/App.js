@@ -3,6 +3,9 @@ import Footer from './components/Footer'
 import MainPage from './components/Main'
 import Login from './components/Login'
 import Register from './components/Register'
+import GetAPost from './components/GetAPost'
+import CreatePost from './components/CreatePost'
+import AllPosts from './components/AllPosts'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 function NoMatch() {
@@ -25,6 +28,9 @@ function App() {
           <Route path="/" element = {<MainPage/>}/>
           <Route path="/login" element = {<Login/>}/>
           <Route path="/register" element = {<Register/>}/>
+          <Route path="/post/:id" element={<GetAPost/>}/>
+          <Route path="/posts" element={<AllPosts/>}/>
+          <Route path="/createPost" element={<CreatePost/>}/>
           <Route path="*" element={<NoMatch/>}/>
         </Routes>
         <Footer/>

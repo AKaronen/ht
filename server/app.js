@@ -25,9 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./api/user.js'));
-//app.use('/private', passport.authenticate("jwt", {session: false}), require('./api/private.js'));
-//app.use('/todo', passport.authenticate("jwt", {session: false}), require('./api/todo.js'));
-
+app.use('/posts' , require('./api/posts.js'));
+app.use('/private', passport.authenticate("jwt", {session: false}), require('./api/private.js'));
 
 if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.resolve("..", "client", "build")));
