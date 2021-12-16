@@ -1,30 +1,30 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 
 function CreatePost() {
-    const [postData, setpostData] = useState({user: "", items: []});
+    const [postData, setpostData] = useState({ user: "", item: "", comments: [] });
     const auth_token = localStorage.getItem("auth_token")
     useEffect(() => {
         fetch("/private/", {
             method: "GET",
-            headers:{
+            headers: {
                 "authorization": "Bearer " + auth_token
             },
-            mode:"cors"
+            mode: "cors"
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            setpostData({user: data})
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setpostData({ user: data.username })
+            })
     }, [])
 
 
-    const submit = (e) =>{
+    const submit = (e) => {
         e.preventDefault();
         fetch("/private/post", {
-            method:"POST",
+            method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "authorization": "Bearer " + auth_token
@@ -32,13 +32,14 @@ function CreatePost() {
             body: JSON.stringify(postData),
             mode: "cors"
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                window.location.href="/posts/"
+            })
     }
-    const change = (e) =>{
-        setpostData({...postData, [e.target.name]: e.target.value})
+    const change = (e) => {
+        setpostData({ ...postData, [e.target.name]: e.target.value })
         console.log(postData);
     }
     return (
@@ -47,9 +48,25 @@ function CreatePost() {
             <div className="container col s6">
                 <div className="row">
                     <form onSubmit={submit} id="post-form" onChange={change}>
+                        <label htmlFor="title">Title</label>
+                        <input type="text" name="title" id="title" required />
                         <label htmlFor="Text">Text</label>
-                            <input type="Text" name="items" id="Text" required/>
-                        <input type="submit" className="btn" name="button" value="Submit"/>
+                        <input type="Text" name="item" id="Text" required />
+                        <label htmlFor="language">Language</label>
+                        <br />
+                        <div class="input-field col s3" id="language" name="language">
+                            <select>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="JS">JavaScript</option>
+                                <option value="P">Python</option>
+                                <option value="C#">C#</option>
+                                <option value="C++">C++</option>
+                                <option value="C">C</option>
+                                <option value="SQL">SQL</option>
+                            </select>
+                        </div>
+                        <br />
+                        <input type="submit" className="btn" name="button" value="Submit" />
                     </form>
                 </div>
             </div>

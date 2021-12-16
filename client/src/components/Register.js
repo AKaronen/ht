@@ -38,9 +38,11 @@ function Register() {
                     <div id="error" className="card-panel indigo white-text"/>
                     <form onSubmit={submit} id="register-form" onChange={change}>
 
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                             <input type="email" name="email" id="email" required/>
-                        <label for="password">Password </label> 
+                        <label htmlFor="username">Username</label>
+                            <input type="text" name="username" id="username" required/>
+                        <label htmlFor="password">Password </label> 
                             <input type="password" name="password" id="password" required/>
                             <br/>
                         <input type="submit" className="btn" name="button" value="Register"/>

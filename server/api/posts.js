@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.get('/', (req, res, next) => {
+router.get('/allPosts', (req, res, next) => {
 
     Posts.find({}, (err, posts) => {
         if (err) throw err;
@@ -47,23 +47,35 @@ router.get('/', (req, res, next) => {
             return res.json({});
         }
         else {
-            return res.json({posts});
+            return res.send(posts);
         }
 
     });
 });
 
 router.get('/:id', function (req, res, next) {
-    Posts.find({user: req.params.id}, (err,post) => {
+    Posts.findOne({_id: req.params.id}, (err,post) => {
         if(err) return next(err)
         if(post){
-            res.json(post);
+            res.send(post);
         }
         else{
             return res.status(404)
         }
     });
 
+
+});
+router.get('/search/:input', function (req, res, next) {
+    Posts.find({item: new RegExp(req.params.input, "i")}, (err,posts) => {
+        if(err) return next(err)
+        if(posts){
+            res.send(posts);
+        }
+        else{
+            return res.status(404)
+        }
+    });
 
 });
 

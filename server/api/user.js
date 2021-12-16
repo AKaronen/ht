@@ -67,8 +67,10 @@ router.post('/register',
             else {
               Users.create(
                 {
+                  username: req.body.username,
                   email: req.body.email,
-                  password: hash
+                  password: hash,
+                  admin: false
                 },
                 (err, ok) => {
                   if(err) throw err;

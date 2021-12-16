@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
     user: {type: String},
-    items: []
+    title: String,
+    item: String,
+    comments: []
 });
 
 module.exports = mongoose.model("Posts", PostSchema);

@@ -1,23 +1,22 @@
-import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-
+import {Link} from 'react-router-dom'
 function AllPosts() {
-    const Postname = useParams();
-    const [PostData, setPostData] = useState({});
+    const [PostData, setPostData] = useState([]);
     
     useEffect(() => {
-        fetch("/api/posts/")
+        fetch("/posts/allPosts")
         .then(response => response.json())
         .then(data => {
-            setPostData(data[0]);
+            setPostData(data);
         })
-    }, [Postname])
-    if(PostData?.length>0){
+    }, [])
+    console.log(PostData)
+    if(PostData[0]?.item?.length>0){
         return (
             <div>
                 <ul>
-                    {PostData.forEach((post) => (
-                        <li>{post}</li>
+                    {PostData.map(post=>(
+                        <li key={post._id}><Link to = {`/post/${post._id}`}>{post.title}</Link></li>
                     ))}
                 </ul>
             </div>
