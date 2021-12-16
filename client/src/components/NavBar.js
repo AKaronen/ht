@@ -40,14 +40,14 @@ function NavBar() {
                         <a href="/" className="brand-logo">Code Forum</a>
                         <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><a href="/createPost" className="waves-effect waves-teal btn-flat white-text">Create a Post</a></li>
+                            <li><a href="/createPost" className="waves-effect waves-teal btn-flat white-text"><i className="material-icons">add</i></a></li>
                             <li><a href="/posts" className="waves-effect waves-teal btn-flat white-text">Posts</a></li>
                             <li><button className="waves-effect waves-teal btn-flat white-text" id="logout" style={{ visibility: "visible" }} onClick={logout}>Logout</button></li>
                         </ul>
                     </div>
                 </nav>
                 <ul className="sidenav indigo" id="slide-out">
-                    <li><a href="/createPost" className="waves-effect waves-teal btn-flat white-text">Create a Post</a></li>
+                    <li><a href="/createPost" className="waves-effect waves-teal btn-flat white-text">Create a Post</a><i className="material-icons">add</i></li>
                     <li><a href="/posts" className="waves-effect waves-teal btn-flat white-text">Posts</a></li>
                     <li><a href="/" className="waves-effect waves-teal btn-flat white-text" id="logout" style={{ visibility: "visible" }}>Logout</a></li>
                 </ul>

@@ -11,7 +11,7 @@ function AllPosts() {
         })
     }, [])
     console.log(PostData)
-    if(PostData[0]?.item?.length>0){
+    if(PostData.length>0){
         return (
             <div>
                 <ul>

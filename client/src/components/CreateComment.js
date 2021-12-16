@@ -1,12 +1,13 @@
 import {useState} from 'react'
 
 
-function CreateComment({postid}) {
-    const [commentData, setcommentData] = useState({post: postid, username: "", comment: ""});
+function CreateComment({postid, user}) {
+    const [commentData, setcommentData] = useState({});
     const auth_token = localStorage.getItem("auth_token");
     
+    
     const submit = (e) => {
-        e.preventDefault();
+        e.preventDefault();  
         fetch("/private/comment", {
             method: "POST",
             headers: {
@@ -17,17 +18,20 @@ function CreateComment({postid}) {
             mode: "cors"
         })
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                window.location.reload();
-                setcommentData("");
-            })
+            .then(window.location.reload())
     }
     const change = (e) => {
         setcommentData({ ...commentData, [e.target.name]: e.target.value })
     }
 
-
+    const setData = () =>{
+        const d = new Date()
+        const date = d.toLocaleDateString();
+        const timenow = d.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'});
+        const newtime = timenow + " " +date  ; 
+        setcommentData({...commentData, time: newtime, username: user , post: postid})
+        
+    }
     if(!auth_token){
        return (     
         <div>
@@ -35,14 +39,13 @@ function CreateComment({postid}) {
         </div>) 
     }
     else{
+        console.log(commentData);
         return(
             <div>
             <h5>Comment</h5>       
             <div className="container col s6">
                 <div className="row">
-                    <form onSubmit = {submit} onChange={change}>
-                        <label htmlFor="username">Username</label>
-                            <input type="text" name="username" id="username" required/>
+                    <form onSubmit = {submit} onClick = {setData}onChange={change}>
                         <label htmlFor="comment">Comment</label> 
                             <input type="text" name="comment" id="comment" required/>
                             <br/>

@@ -35,7 +35,7 @@ function CreatePost() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                window.location.href="/posts/"
+                window.location.href = "/posts/"
             })
     }
     const change = (e) => {
@@ -50,22 +50,10 @@ function CreatePost() {
                     <form onSubmit={submit} id="post-form" onChange={change}>
                         <label htmlFor="title">Title</label>
                         <input type="text" name="title" id="title" required />
-                        <label htmlFor="Text">Text</label>
-                        <input type="Text" name="item" id="Text" required />
-                        <label htmlFor="language">Language</label>
-                        <br />
-                        <div class="input-field col s3" id="language" name="language">
-                            <select>
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="JS">JavaScript</option>
-                                <option value="P">Python</option>
-                                <option value="C#">C#</option>
-                                <option value="C++">C++</option>
-                                <option value="C">C</option>
-                                <option value="SQL">SQL</option>
-                            </select>
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea" name="item" required></textarea>
+                            <label for="textarea1">Write your Post here</label>
                         </div>
-                        <br />
                         <input type="submit" className="btn" name="button" value="Submit" />
                     </form>
                 </div>

@@ -4,7 +4,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import CreateComment from "./CreateComment"
 import Comment from "./Comment"
-function GetAPost() {
+function GetAPost({loggedUser}) {
     const {id} = useParams();
     const [Post, setPost] = useState({});
     
@@ -35,7 +35,7 @@ function GetAPost() {
                     ))}
                 </div> 
                 
-                <CreateComment postid = {id}/>
+                <CreateComment postid = {id} user={loggedUser}/>
             </div>
         )  
     }else{

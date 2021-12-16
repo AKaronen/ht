@@ -26,7 +26,7 @@ router.post('/comment', (req, res, next) => {
             post.save((err) =>{
                 if(err) throw err;
             })
-            return res.json(req.body.comment);
+            return res.json(req.body);
         }
     })
 
