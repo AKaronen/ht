@@ -1,8 +1,8 @@
 
 
-function NavBar({handleSearch, logout, handleChange, searchData}) {
+function NavBar({handleSearch, logout, handleChange, searchData}) { //Props to handle the search field
 
-    if (!localStorage.getItem("auth_token")) {
+    if (!localStorage.getItem("auth_token")) { //Conditional rendering of the navbar, if no one has logged in, render this kind of a navbar
         return (
             <div>
                 <nav>
@@ -36,7 +36,7 @@ function NavBar({handleSearch, logout, handleChange, searchData}) {
 
             </div>
         )
-    } else {
+    } else { //Otherwise render this kind of a navbar with different links and buttons
         return (
             <div>
                 <nav>

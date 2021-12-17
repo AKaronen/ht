@@ -4,7 +4,9 @@ var router = express.Router();
 const Posts = require('../models/Posts');
 
 
-router.post('/post', (req, res, next) => {
+//This api handles all private connections, these can be only accessed if a user has logged in
+
+router.post('/post', (req, res, next) => {  //Creating a post is handled here
 
     Posts.create({
         title: req.body.title,
@@ -18,7 +20,7 @@ router.post('/post', (req, res, next) => {
         }
     })
 });
-router.post('/comment', (req, res, next) => {
+router.post('/comment', (req, res, next) => { //Creating a comment is handled here
     Posts.findOne({_id: req.body.post}, (err, post) =>{
         if(err) throw err;
         if(post){
@@ -32,7 +34,7 @@ router.post('/comment', (req, res, next) => {
 
 })
 
-router.get('/', (req, res, next) =>{
+router.get('/', (req, res, next) =>{ //Getting the userdata if needed with this route
     res.json(req.user);
 }
 );

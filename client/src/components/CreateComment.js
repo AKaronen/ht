@@ -1,11 +1,11 @@
 import {useState} from 'react'
 
 function CreateComment({postid, user}) {
-    const [commentData, setcommentData] = useState({});
-    const auth_token = localStorage.getItem("auth_token");
+    const [commentData, setcommentData] = useState({}); //state of the comment
+    const auth_token = localStorage.getItem("auth_token"); //get the auth_token from localStorage
     
     
-    const submit = (e) => {
+    const submit = (e) => { //if user is logged in, he/she should eventually be able to submit comments
         e.preventDefault();  
         fetch("/private/comment", {
             method: "POST",
@@ -19,11 +19,11 @@ function CreateComment({postid, user}) {
             .then(response => response.json())
             .then(window.location.reload())
     }
-    const change = (e) => {
+    const change = (e) => { //here we change the commentData as user types something to the comment textfield
         setcommentData({ ...commentData, [e.target.name]: e.target.value })
     }
 
-    const setData = () =>{
+    const setData = () =>{ //getting the time of submition and setting all the usefull data to the commentData parameter
         const d = new Date()
         const date = d.toLocaleDateString();
         const timenow = d.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'});
@@ -38,7 +38,6 @@ function CreateComment({postid, user}) {
         </div>) 
     }
     else{
-        console.log(commentData);
         return(
             <div>
             <div className="container col s12 left-align">
@@ -54,7 +53,7 @@ function CreateComment({postid, user}) {
                 </div>
             </div>
         </div> 
-        )
+        )   //Comment submition form
     }
 }
 

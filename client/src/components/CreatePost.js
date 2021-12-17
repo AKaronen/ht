@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 
 function CreatePost() {
-    const [postData, setpostData] = useState({ user: "", item: "", comments: [] });
+    const [postData, setpostData] = useState({ user: "", item: "", comments: [] }); //pretty much a copy of the comment form
     const auth_token = localStorage.getItem("auth_token")
     useEffect(() => {
         fetch("/private/", {
@@ -16,12 +16,12 @@ function CreatePost() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setpostData({ user: data.username })
+                setpostData({ user: data.username }) //fetch userdata
             })
     }, [])
 
 
-    const submit = (e) => {
+    const submit = (e) => { //submit the post
         e.preventDefault();
         fetch("/private/post", {
             method: "POST",
@@ -39,9 +39,9 @@ function CreatePost() {
             })
     }
     const change = (e) => {
-        setpostData({ ...postData, [e.target.name]: e.target.value })
+        setpostData({ ...postData, [e.target.name]: e.target.value }) //setting data on change
     }
-    const setData = () =>{
+    const setData = () =>{ //setting data on Click of the submit button
         const d = new Date()
         const date = d.toLocaleDateString();
         setpostData({...postData, time: date})
@@ -65,7 +65,7 @@ function CreatePost() {
             </div>
         </div>
 
-    )
+    ) //Post submition form
 }
 
 export default CreatePost

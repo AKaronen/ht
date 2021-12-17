@@ -10,7 +10,7 @@ function Searched() {
     const [loading, setLoading] = useState(false);
     const {search} = useParams()
 
-    useEffect(() => {
+    useEffect(() => { //get the search results
         setLoading(true)
         if(!search){
           window.location.replace("/*");
@@ -24,10 +24,10 @@ function Searched() {
           })
         } 
     },[])
-    //Slicing searched the posts to 10 page slices
+    //Slicing searched the posts to 10 page slices with some basic logic
     const lastPostIndex = currentPage * count; 
     const firstPostIndex = lastPostIndex-count;
-    const currentPosts = currentResults.slice(firstPostIndex,lastPostIndex); 
+    const currentPosts = currentResults.slice(firstPostIndex,lastPostIndex);
 
     // Page switcher
     const switchPage = (page) => setCurrentPage(page);

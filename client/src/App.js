@@ -25,8 +25,8 @@ function App() {
   const auth_token = localStorage.getItem("auth_token");
   const [PostData, setPostData] = useState([]);
   const [loading, setLoading] = useState(false)
-  const [searchResults, setSearchResults] = useState([])
-  useEffect(() => {
+  const [searchData, setSearchData] = useState("")
+  useEffect(() => { //Loading all the posts from the database as the page loads
     setLoading(true)
     fetch("/posts/allPosts")
       .then(response => response.json())
@@ -36,7 +36,7 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
+  useEffect(() => { //Loading user info
     fetch("/private/", {
       method: "GET",
       headers: {
@@ -48,23 +48,22 @@ function App() {
       .then(data => {
         setUserData(data.username)
       })
-  }, [auth_token])
+  }, [userData])
 
 
-  const handleSearch = () => {
+  const handleSearch = () => { //handle search (these could be also in the navbar section but oh well)
     window.location.replace("/results/"+searchData);
   }
-  const logout = () => {
-    localStorage.removeItem("auth_token");
-    window.location.href = "/";
-  }
-  const [searchData, setSearchData] = useState("")
-
   const handleChange = (e) => {
     setSearchData(e.target.value)
   }
-  console.log(searchResults);
-  return (
+  const logout = () => { //logout button functionality 
+    localStorage.removeItem("auth_token");
+    window.location.href = "/";
+  }
+
+  
+  return ( //the whole structure of the app as it stands, all the active routes and their components
     <Router>
       <div className="App">
         <NavBar
@@ -87,7 +86,7 @@ function App() {
       </div>
     </Router>
 
-  );
+  ); 
 }
 
 export default App;

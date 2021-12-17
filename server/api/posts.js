@@ -3,11 +3,10 @@ var router = express.Router();
 const Posts = require('../models/Posts');
 
 
+//This api handles all the post related fetches
 
 
-
-router.get('/allPosts', (req, res, next) => {
-
+router.get('/allPosts', (req, res, next) => { //get all the posts
     Posts.find({}, (err, posts) => {
         if (err) throw err;
         if (!posts) {
@@ -20,7 +19,7 @@ router.get('/allPosts', (req, res, next) => {
     });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) { //get a specific post with it's id created by mongoDB
     Posts.findOne({_id: req.params.id}, (err,post) => {
         if(err) return next(err)
         if(post){
@@ -34,7 +33,7 @@ router.get('/:id', function (req, res, next) {
 
 });
 
-router.get('/search/:input', function (req, res, next) {
+router.get('/search/:input', function (req, res, next) { //get the searched posts
     Posts.find({item: new RegExp(req.params.input, "i")}, (err,posts) => {
         if(err) return next(err)
         if(posts){

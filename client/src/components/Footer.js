@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Footer() {
+function Footer() { //basic Footer
     return (
         <div>
             <footer className="page-footer indigo">

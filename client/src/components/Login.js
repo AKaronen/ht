@@ -1,12 +1,12 @@
 import React from 'react'
 import {useState} from 'react'
 
-function Login() {
+function Login() {  //Basic login form
     const [userData, setuserData] = useState({});
     
-    const submit = (e) =>{
+    const submit = (e) =>{ //Post login data on submit
         e.preventDefault();
-        fetch("/login", {
+        fetch("/user/login", {
             method:"POST",
             headers: {
                 "Content-type": "application/json"
@@ -28,11 +28,11 @@ function Login() {
             }
         })
     }
-    const change = (e) =>{
+    const change = (e) =>{ //change various login data on change
         setuserData({...userData, [e.target.name]: e.target.value})
     }
 
-    return (
+    return ( //Render the login form
         <div>
             <h1>Login</h1>       
             <div className="container col s6">

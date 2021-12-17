@@ -1,12 +1,12 @@
 import React from 'react'
 import {useState} from 'react'
 
-function Register() {
+function Register() { //Almost the same as the login form
     const [userData, setuserData] = useState({});
     
     const submit = (e) =>{
         e.preventDefault();
-        fetch("/register", {
+        fetch("/user/register", {
             method:"POST",
             headers: {
                 "Content-type": "application/json"
@@ -30,7 +30,7 @@ function Register() {
     const change = (e) =>{
         setuserData({...userData, [e.target.name]: e.target.value})
     }
-    return (
+    return ( //basic login form
         <div>
             <h1>Register</h1>
             <div className="container col s6">
