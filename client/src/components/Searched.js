@@ -1,16 +1,33 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Pagination from "./Pagination"
+import { useParams } from 'react-router-dom'
 
-function Searched({searchResults, loading}) {
+function Searched() {
     const [currentPage, setCurrentPage] = useState(1); //state to tell us which page should be rendered
     const count = 10; //how many posts to render per page
+    const [currentResults, setCurrentResults] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const {search} = useParams()
 
-
+    useEffect(() => {
+        setLoading(true)
+        if(!search){
+          window.location.replace("/*");
+          console.log("No search data!");
+        }else{
+          fetch("/posts/search/"+search)
+          .then(response => response.json())
+          .then(data => {
+            setCurrentResults(data);
+            setLoading(false)
+          })
+        } 
+    },[])
     //Slicing searched the posts to 10 page slices
     const lastPostIndex = currentPage * count; 
     const firstPostIndex = lastPostIndex-count;
-    const currentPosts = searchResults.slice(firstPostIndex,lastPostIndex); 
+    const currentPosts = currentResults.slice(firstPostIndex,lastPostIndex); 
 
     // Page switcher
     const switchPage = (page) => setCurrentPage(page);
@@ -30,7 +47,7 @@ function Searched({searchResults, loading}) {
             </div>
         )
     }
-    if (searchResults.length > 0) {
+    if (currentResults.length > 0) {
         return (
             <div>
                 <div className="collection">
@@ -39,7 +56,7 @@ function Searched({searchResults, loading}) {
                         //adding Posts as collection items, currentPosts tells us which 10 to pick from all of the posts for the page we are on
                     ))}
                 </div>
-                <Pagination count={count} totalPosts={searchResults.length} switchPage={switchPage}/>
+                <Pagination count={count} totalPosts={currentResults.length} switchPage={switchPage}/>
             </div>
             
         )

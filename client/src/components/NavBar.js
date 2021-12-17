@@ -8,11 +8,11 @@ function NavBar({handleSearch, logout, handleChange, searchData}) {
                 <nav>
                     <div className="nav-wrapper indigo">
                         <a href="/" className="brand-logo">Code Forum</a>
-                        <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                        <a href="/#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li className="search">
                                 <div className='search-wrapper'>
-                                    <input type="text" id="search" placeholder='Search' onChange={handleChange} onKeyPress={(e) => e.key === 'Enter' && handleSearch}/>
+                                    <input type="text" id="search" placeholder='Search' onChange={handleChange} onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchData)}/>
                                 </div>
                             </li>
                             <li><a href="/" className="waves-effect waves-teal btn-flat white-text" id="logout" style={{ visibility: "hidden" }}>Logout</a></li>
@@ -42,7 +42,7 @@ function NavBar({handleSearch, logout, handleChange, searchData}) {
                 <nav>
                     <div className="nav-wrapper indigo">
                         <a href="/" className="brand-logo">Code Forum</a>
-                        <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                        <a href="/#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li className="search">
                                 <div className='search-wrapper'>
