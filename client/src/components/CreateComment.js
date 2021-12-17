@@ -1,6 +1,5 @@
 import {useState} from 'react'
 
-
 function CreateComment({postid, user}) {
     const [commentData, setcommentData] = useState({});
     const auth_token = localStorage.getItem("auth_token");
@@ -42,14 +41,15 @@ function CreateComment({postid, user}) {
         console.log(commentData);
         return(
             <div>
-            <h5>Comment</h5>       
-            <div className="container col s6">
+            <div className="container col s12 left-align">
                 <div className="row">
-                    <form onSubmit = {submit} onClick = {setData}onChange={change}>
-                        <label htmlFor="comment">Comment</label> 
-                            <input type="text" name="comment" id="comment" required/>
-                            <br/>
-                        <input type="submit" className="btn" name="button" value="submit"/>
+                    <form onSubmit = {submit} onChange={change}>
+                        <div className="input-field col s12">
+                            <textarea id="textarea1" className="materialize-textarea" name="comment" required></textarea>
+                            <label htmlFor="textarea1">Write your Comment</label>
+                        </div>
+                        <br/>
+                        <input type="submit" className="btn" name="button" value="submit" onClick = {setData}/>
                     </form>
                 </div>
             </div>

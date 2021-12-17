@@ -40,7 +40,12 @@ function CreatePost() {
     }
     const change = (e) => {
         setpostData({ ...postData, [e.target.name]: e.target.value })
-        console.log(postData);
+    }
+    const setData = () =>{
+        const d = new Date()
+        const date = d.toLocaleDateString();
+        setpostData({...postData, time: date})
+        
     }
     return (
         <div>
@@ -50,11 +55,11 @@ function CreatePost() {
                     <form onSubmit={submit} id="post-form" onChange={change}>
                         <label htmlFor="title">Title</label>
                         <input type="text" name="title" id="title" required />
-                        <div class="input-field col s12">
-                            <textarea id="textarea1" class="materialize-textarea" name="item" required></textarea>
+                        <div className="input-field col s12">
+                            <textarea id="textarea1" className="materialize-textarea" name="item" required></textarea>
                             <label for="textarea1">Write your Post here</label>
                         </div>
-                        <input type="submit" className="btn" name="button" value="Submit" />
+                        <input type="submit" className="btn" name="button" value="Submit" onClick={setData}/>
                     </form>
                 </div>
             </div>

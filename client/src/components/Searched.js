@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Pagination from "./Pagination"
-function AllPosts({ PostData, loading }) {
+
+function Searched({searchResults, loading}) {
     const [currentPage, setCurrentPage] = useState(1); //state to tell us which page should be rendered
     const count = 10; //how many posts to render per page
+
+
+    //Slicing searched the posts to 10 page slices
+    const lastPostIndex = currentPage * count; 
+    const firstPostIndex = lastPostIndex-count;
+    const currentPosts = searchResults.slice(firstPostIndex,lastPostIndex); 
+
+    // Page switcher
+    const switchPage = (page) => setCurrentPage(page);
 
     if (loading) { // If page is loading, render this
         return (
@@ -20,17 +30,7 @@ function AllPosts({ PostData, loading }) {
             </div>
         )
     }
-
-    //Slicing All the posts to 10 page slices
-    const lastPostIndex = currentPage * count; 
-    const firstPostIndex = lastPostIndex-count;
-    const currentPosts = PostData.slice(firstPostIndex,lastPostIndex); 
-
-    // Page switcher
-    const switchPage = (page) => setCurrentPage(page);
-
-
-    if (PostData.length > 0) {
+    if (searchResults.length > 0) {
         return (
             <div>
                 <div className="collection">
@@ -39,7 +39,7 @@ function AllPosts({ PostData, loading }) {
                         //adding Posts as collection items, currentPosts tells us which 10 to pick from all of the posts for the page we are on
                     ))}
                 </div>
-                <Pagination count={count} totalPosts={PostData.length} switchPage={switchPage}/>
+                <Pagination count={count} totalPosts={searchResults.length} switchPage={switchPage}/>
             </div>
             
         )
@@ -53,5 +53,4 @@ function AllPosts({ PostData, loading }) {
 
 }
 
-export default AllPosts
-
+export default Searched

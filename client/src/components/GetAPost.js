@@ -1,47 +1,61 @@
-import {useParams} from 'react-router-dom'
-import {useState, useEffect} from 'react'
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import CreateComment from "./CreateComment"
 import Comment from "./Comment"
-function GetAPost({loggedUser}) {
-    const {id} = useParams();
+import APost from "./APost"
+
+
+function GetAPost({ loggedUser }) {
+    const { id } = useParams();
     const [Post, setPost] = useState({});
-    
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        fetch("/posts/"+id, {
+        setLoading(true)
+        fetch("/posts/" + id, {
             method: "GET",
             mode: "cors"
         })
-        .then(response => response.json())
-        .then(data => {
-            setPost(data)
-            
-        })
-    },[id])
-    if(Post?.item?.length>0){
-        console.log(Post.comments);
+            .then(response => response.json())
+            .then(data => {
+                setPost(data)
+                setLoading(false)
+            })
+    }, [id])
+
+    if(loading) { // If page is loading, render this
         return (
-            <div className="container">
-                <h4>{Post.user}</h4>
-                <h5 className="header" id="title">{Post.title}</h5>
-                <SyntaxHighlighter style={docco} className="card-panel s12 col3">
-                    {Post.item}
-                </SyntaxHighlighter>
-                <h5>Comments:</h5>
+            <div className="preloader-wrapper big active">
+                <div className="spinner-layer spinner-blue-only">
+                    <div className="circle-clipper left">
+                        <div className="circle"></div>
+                    </div><div className="gap-patch">
+                        <div className="circle"></div>
+                    </div><div className="circle-clipper right">
+                        <div className="circle"></div>
+                    </div>
+                </div>
+            </div>
+            )
+    }
+    if (Post?.item?.length > 0) { // If the Post has been found, render this
+        return (
+            <div>
+                <APost Post={Post}/>
+                {Post.comments.length > 0 && (<h5>Comments:</h5>)}
                 <div className="comment-container">
                     {Post.comments.map((comment, index) => (
-                        <Comment key={index} comment={comment}/>
+                        <Comment key={index} comment={comment} />
                     ))}
-                </div> 
-                
-                <CreateComment postid = {id} user={loggedUser}/>
+                </div>
+
+                <CreateComment postid={id} user={loggedUser} />
             </div>
-        )  
-    }else{
+        )
+    }
+    else{ //If nothing is found, render this
         return(
             <div>
-                No Post was found
+                Nothing here!
             </div>
         )
     }
