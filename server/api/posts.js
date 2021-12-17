@@ -34,7 +34,8 @@ router.get('/:id', function (req, res, next) { //get a specific post with it's i
 });
 
 router.get('/search/:input', function (req, res, next) { //get the searched posts
-    Posts.find({item: new RegExp(req.params.input, "i")}, (err,posts) => {
+    var searchRegExp = new RegExp(req.params.input, "i");
+    Posts.find({$or:[{item: searchRegExp}, {title: searchRegExp}]}, (err,posts) => { //search input is found in either in the post or the title -> return posts
         if(err) return next(err)
         if(posts){
             res.send(posts);
