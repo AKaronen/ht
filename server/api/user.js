@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require("bcryptjs");
-const {body, validationResult} = require("express-validator");
+const {body, validationResult} = require("express-validator"); //useful tool for handling logging and registering data
 const Users = require("../models/Users");
 const JWT = require("jsonwebtoken");
 
